@@ -45,11 +45,24 @@
       margin-bottom: 40px;
     }
 
-    .name {
-      font-size: 2.2rem;
-      font-weight: 800;
-      letter-spacing: -1px;
-    }
+.name {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+
+  background: linear-gradient(90deg, #5eead4, #6366f1, #5eead4);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: nameFlow 6s ease infinite;
+}
+
+@keyframes nameFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
     .tagline {
       color: var(--muted);
