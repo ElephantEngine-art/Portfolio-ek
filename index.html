@@ -379,22 +379,26 @@ body::after {
   from { transform: translateY(0px); }
   to { transform: translateY(-40px); }
 }
-    body::after {
-  content: "";
+.mouse-glow {
   position: fixed;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(94,234,212,0.15), transparent 85%);
-  top: var(--y, 50%);
-  left: var(--x, 50%);
-  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(
+    circle,
+    rgba(94, 234, 212, 0.12),
+    transparent 60%
+  );
+  border-radius: 50%;
   pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 0;
   filter: blur(40px);
 }
   </style>
 </head>
 
 <body>
+  <div class="mouse-glow" id="mouseGlow"></div>
   <div class="noise"></div>
   <div class="container">
 
@@ -567,5 +571,13 @@ body::after {
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
+  <script>
+const glow = document.getElementById("mouseGlow");
+
+document.addEventListener("mousemove", (e) => {
+  glow.style.left = e.clientX + "px";
+  glow.style.top = e.clientY + "px";
+});
+</script>
 </body>
 </html>
