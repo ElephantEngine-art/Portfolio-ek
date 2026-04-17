@@ -446,6 +446,23 @@ body::after {
   transform: scale(1.03);
   filter: brightness(1.1);
 }
+    section h2 {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 8px;
+}
+
+section h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 120%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), rgba(99,102,241,0.6), transparent);
+  border-radius: 999px;
+  opacity: 0.7;
+}
   </style>
 </head>
 
