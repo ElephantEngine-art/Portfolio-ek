@@ -394,10 +394,60 @@ body::after {
   z-index: 0;
   filter: blur(40px);
 }
+    /* ===== MULTI-LIGHT SYSTEM ===== */
+
+.light-system {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Main cursor light */
+.light {
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  filter: blur(50px);
+  opacity: 0.35;
+  transition: transform 0.08s linear;
+}
+
+/* Primary (teal) */
+.light.primary {
+  background: radial-gradient(circle, rgba(94,234,212,0.35), transparent 60%);
+}
+
+/* Secondary (purple) */
+.light.secondary {
+  background: radial-gradient(circle, rgba(99,102,241,0.35), transparent 60%);
+  width: 600px;
+  height: 600px;
+  opacity: 0.25;
+  filter: blur(70px);
+}
+
+/* Ambient base glow */
+.ambient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(255,255,255,0.04),
+    transparent 60%
+  );
+}
   </style>
 </head>
 
 <body>
+  <div class="light-system">
+  <div class="light primary" id="lightPrimary"></div>
+  <div class="light secondary" id="lightSecondary"></div>
+  <div class="ambient"></div>
+</div>
   <div class="mouse-glow" id="mouseGlow"></div>
   <div class="noise"></div>
   <div class="container">
@@ -579,5 +629,39 @@ document.addEventListener("mousemove", (e) => {
   glow.style.top = e.clientY + "px";
 });
 </script>
+
+  <script>
+const primary = document.getElementById("lightPrimary");
+const secondary = document.getElementById("lightSecondary");
+
+let mouseX = window.innerWidth / 2;
+let mouseY = window.innerHeight / 2;
+
+let secX = mouseX;
+let secY = mouseY;
+
+document.addEventListener("mousemove", (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+function animate() {
+  // primary follows instantly
+  primary.style.left = mouseX + "px";
+  primary.style.top = mouseY + "px";
+
+  // secondary lags behind (gives depth)
+  secX += (mouseX - secX) * 0.08;
+  secY += (mouseY - secY) * 0.08;
+
+  secondary.style.left = secX + "px";
+  secondary.style.top = secY + "px";
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+  
 </body>
 </html>
