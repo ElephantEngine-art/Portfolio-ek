@@ -110,6 +110,15 @@
       box-shadow: 0px 10px 30px var(--shadow);
       backdrop-filter: blur(12px);
     }
+    .card {
+  transform-style: preserve-3d;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px) rotateX(2deg) rotateY(-2deg);
+  box-shadow: 0px 25px 60px rgba(0, 0, 0, 0.6);
+}
 .card::after {
   content: "";
   position: absolute;
